@@ -1,4 +1,17 @@
-Project Mazebuilder
+Project Pathfinder
 
+- figure out git
+- create grid with nodes
+    - node class
+        - has: coords, color, neighbors
 
-test
+- implement GUI
+    - make nodes interactable
+    
+- code A* pathfinding algo
+- visualize steps
+
+maybe:
+- more pathfinding algos
+- mazing algos
+- website with django
