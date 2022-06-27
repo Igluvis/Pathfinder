@@ -1,10 +1,10 @@
-from utils.node import Node
+from .node import Node
 
 
 def build_nodes(rows, cols):
     '''
     node[x][y]
-    makes a simple matrix with y rows and x cols
+    makes a simple matrix with y rows and x cols containing a node
     walkable : walkable = 1; not walkable = 0
         rows: number of rows
         cols: number of cols
@@ -13,12 +13,12 @@ def build_nodes(rows, cols):
     for x in range(cols):
         nodes.append([])
         for y in range(rows):
-            # make border unwalkable
+            # check if border
             if y == 0 or y == rows - 1 or x == 0 or x == cols - 1:
-                nodes [x].append(Node(x=x, y=y, walkable=0))
+                nodes[x].append(Node(x=x, y=y, walkable=0))
 
             else:
-                nodes [x].append(Node(x=x, y=y, walkable=1))
+                nodes[x].append(Node(x=x, y=y, walkable=1))
 
     return nodes 
 
@@ -26,7 +26,7 @@ class Grid():
     '''
     creates nodes according to grid size
     '''
-    def __init__(self, rows, cols, matrix):
+    def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
 
