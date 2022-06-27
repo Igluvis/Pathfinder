@@ -5,6 +5,9 @@ import grid
 def main(win, width, height):
     '''
     main pygame loop
+        win: pygame.window
+        width: width of window
+        height: height of window
     '''
     ROWS, COLS = 50, 50
     # create grid

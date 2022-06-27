@@ -6,6 +6,8 @@ def build_nodes(rows, cols):
     node[x][y]
     makes a simple matrix with y rows and x cols
     walkable : walkable = 1; not walkable = 0
+        rows: number of rows
+        cols: number of cols
     '''
     nodes = []
     for x in range(cols):
@@ -33,21 +35,34 @@ class Grid():
     def node(self, x, y):
         '''
         get node at pos (x,y)
+            x: x coord
+            y: y coord
         '''
         return self.nodes[x][y]
+
+    def inside(self, x, y):
+        '''
+        check, if field position is inside map
+            x: x pos
+            y: y pos
+        '''
+        return 0 <= x < self.cols and 0 <= y < self.rows
 
     def walkable(self, x, y):
         '''
         helper function
-        returns if node at (x,y) is walkable == 1
+        returns if node at (x,y) is walkable == 1 and has to exist
+            x: x coord
+            y: y coord
         '''
-        return self.nodes[x][y].walkable
+        return self.nodes[x][y].walkable and self.inside(x, y)
 
     def neighbors(self, node):
         '''
         get all neighbors of one node
         1. checks each neighbor if walkable
         2. adds neighbor node to list
+            node: node
         '''
         # coords
         x = node.x
