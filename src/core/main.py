@@ -2,14 +2,12 @@ import pygame
 import grid
 
 
-def main(win, width):
+def main(win, width, height):
     '''
     main pygame loop
     '''
-    ROWS, COLS = 50
-
-    # creates simple matrix
-    # grid = grid(ROWS)  # matrix with values representing status of nodes (0 = walkable, 1 = non-walkable)
+    ROWS, COLS = 50, 50
+    # create grid
 
     # run loop
     run = True
