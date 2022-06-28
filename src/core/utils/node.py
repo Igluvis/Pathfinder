@@ -22,4 +22,4 @@ class Node():
         return False
 
     def cleanup(self):
-        pass
+        self.status = 'walkable'
