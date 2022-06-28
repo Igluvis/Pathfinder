@@ -7,7 +7,7 @@ GREEN = (0, 255, 0)         # Open
 BLACK = (0, 0, 0)           # Barrier
 ORANGE = (255, 165 ,0)      # Start
 TURQUOISE = (64, 224, 208)  # End
-PURPLE = (128, 0, 128)      # Purple
+PURPLE = (128, 0, 128)      # Path
 WHITE = (255, 255, 255)     # Reset
 BLUE = (0, 255, 0)          # ?
 YELLOW = (255, 255, 0)      # ?
@@ -17,7 +17,10 @@ color_dic = {
     'walkable': WHITE,
     'wall': BLACK,
     'start': ORANGE,
-    'end': TURQUOISE
+    'end': TURQUOISE,
+    'closed': RED,
+    'open': GREEN,
+    'path': PURPLE
 }
 
 def draw_grid(win, width, height, rows, cols):

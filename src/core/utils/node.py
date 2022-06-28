@@ -9,11 +9,15 @@ class Node():
 
         '''
         walkable
+            start
+            end
         wall
-        start
-        end
+        closed
+        open
         '''
         self.status = status
+
+        self.cleanup()
 
     def __lt__(self, other):
         '''
@@ -22,20 +26,27 @@ class Node():
         return False
 
     def cleanup(self):
-        self.status = 'walkable'
+        # backtracking
+        self.parent = None
 
     # get status methods
     def get_wall(self):
         return self.status == 'wall'
 
     def get_walkable(self):
-        return self.status == 'walkable'
+        return self.status == 'walkable' or self.status == 'start' or self.status == 'end'
 
     def get_start(self):
         return self.status == 'start'
 
     def get_end(self):
         return self.status == 'end'
+
+    def get_closed(self):
+        return self.status == 'closed'
+
+    def get_open(self):
+        return self.status == 'open'
 
     # set status methods
     def set_wall(self):
@@ -50,3 +61,11 @@ class Node():
     def set_end(self):
         self.status = 'end'
 
+    def set_closed(self):
+        self.status = 'closed'
+
+    def set_open(self):
+        self.status = 'open'
+
+    def set_path(self):
+        self.status = 'path'
