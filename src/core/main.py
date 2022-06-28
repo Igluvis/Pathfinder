@@ -33,7 +33,7 @@ def main(win, width, height, rows, cols):
                     if start:
                         start.cleanup()
                     node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                    node.status = 'start'
+                    node.set_start()
                     start = node
 
             if event.type == pygame.KEYDOWN:
@@ -41,16 +41,16 @@ def main(win, width, height, rows, cols):
                     if end:
                         end.cleanup()
                     node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                    node.status = 'end'
+                    node.set_end()
 
             # Draw wall with left mouse click
             if pygame.mouse.get_pressed()[0]:
                 node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                node.status = 'wall'
+                node.set_wall()
 
             # empty node with right click
             if pygame.mouse.get_pressed()[2]:
                 node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                node.status = 'walkable'
+                node.set_walkable()
 
     pygame.quit()

@@ -10,15 +10,21 @@ def build_nodes(rows, cols):
             cols: number of cols
     '''
     nodes = []
+
     for x in range(cols):
         nodes.append([])
         for y in range(rows):
-            # check if border
+            
+            # border nodes
             if y == 0 or y == rows - 1 or x == 0 or x == cols - 1:
-                nodes[x].append(Node(x=x, y=y, status='wall'))
+                status = 'wall'
 
+            # generic nodes
             else:
-                nodes[x].append(Node(x=x, y=y, status='walkable'))
+                status = 'walkable'
+
+            # create node
+            nodes[x].append(Node(x=x, y=y, status=status))
 
     return nodes 
 
@@ -55,7 +61,7 @@ class Grid():
             x: x coord
             y: y coord
         '''
-        return self.nodes[x][y].walkable and self.inside(x, y)
+        return self.nodes[x][y].get_walkable() and self.inside(x, y)
 
     def neighbors(self, node):
         '''
@@ -89,6 +95,6 @@ class Grid():
         return neighbors
 
     def cleanup(self):
-        for x_nodes in self.nodes:
-            for node in x_nodes:
+        for columns in self.nodes:
+            for node in columns:
                 node.cleanup()
