@@ -3,6 +3,7 @@ from core.utils.grid import Grid
 from core.pygame.visualize import draw
 from core.pygame.misc import get_node
 from core.pathfinder.a_star import a_star
+from core.pathfinder.breadth_first import breadth_first
 
 def main(win, width, height, rows, cols):
     '''
@@ -33,7 +34,7 @@ def main(win, width, height, rows, cols):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     if start:
-                        start.cleanup()
+                        start.set_walkable()
                     node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
                     node.set_start()
                     start = node           
@@ -42,7 +43,7 @@ def main(win, width, height, rows, cols):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_e:
                     if end:
-                        end.cleanup()
+                        end.set_walkable()
                     node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
                     node.set_end()
                     end = node
@@ -57,15 +58,14 @@ def main(win, width, height, rows, cols):
                 node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
                 node.set_walkable()
 
-            # Space: A* algo
+            # Space: start pathfinding visualizer
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and start and end:
-                    a_star(
+                    breadth_first(
                         lambda: draw(win, grid, width, height, rows, cols),
                         start=start,
                         end=end,
                         grid=grid
                     )
-
 
     pygame.quit()

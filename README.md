@@ -20,6 +20,8 @@ Tech with Tim - A* Pathfinding Visualization Tutorial
 Clear Code - Easy pathfinding in python(using breans module)
 [YT](https://www.youtube.com/watch?v=8SigT_jhz4I)
 
+Red Blob Games - Introduction to the A* Algorithm
+[website](https://www.redblobgames.com/pathfinding/a-star/introduction.html)
 
 ### pygame:
 Clear Code - The ultimate introduction to Pygame

@@ -61,7 +61,7 @@ class Grid():
             x: x coord
             y: y coord
         '''
-        return self.nodes[x][y].get_walkable() and self.inside(x, y)
+        return (self.nodes[x][y].get_walkable() or self.nodes[x][y].get_end()) and self.inside(x, y)
 
     def neighbors(self, node):
         '''
