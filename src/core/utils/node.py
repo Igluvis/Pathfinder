@@ -20,3 +20,6 @@ class Node():
         in A* compare f value against infinity if not already calculated
         '''
         return False
+
+    def cleanup(self):
+        pass
