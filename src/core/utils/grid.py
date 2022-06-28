@@ -3,11 +3,11 @@ from .node import Node
 
 def build_nodes(rows, cols):
     '''
-    node[x][y]
-    makes a simple matrix with y rows and x cols containing a node
-    walkable : walkable = 1; not walkable = 0
-        rows: number of rows
-        cols: number of cols
+        node[x][y]
+        makes a simple matrix with y rows and x cols containing a node
+        status
+            rows: number of rows
+            cols: number of cols
     '''
     nodes = []
     for x in range(cols):
@@ -15,10 +15,10 @@ def build_nodes(rows, cols):
         for y in range(rows):
             # check if border
             if y == 0 or y == rows - 1 or x == 0 or x == cols - 1:
-                nodes[x].append(Node(x=x, y=y, walkable=0))
+                nodes[x].append(Node(x=x, y=y, status='wall'))
 
             else:
-                nodes[x].append(Node(x=x, y=y, walkable=1))
+                nodes[x].append(Node(x=x, y=y, status='walkable'))
 
     return nodes 
 
