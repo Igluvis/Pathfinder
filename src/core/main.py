@@ -1,9 +1,11 @@
 import pygame
 from core.utils.grid import Grid
 from core.pygame.visualize import draw
-from core.pygame.misc import get_node
+from core.pygame.misc import get_node, algo_clock
 from core.pathfinder.a_star import a_star
 from core.pathfinder.breadth_first import breadth_first
+
+clock = pygame.time.Clock()
 
 def main(win, width, height, rows, cols):
     '''
@@ -12,6 +14,10 @@ def main(win, width, height, rows, cols):
         width: width of window
         height: height of window
     '''
+    # fps
+    fps = 60
+    gear = 2  # gear translator for fps : 0 = 30, 1 = 60, 2 = 120
+
     # create grid
     grid = Grid(rows, cols)
 
@@ -25,29 +31,14 @@ def main(win, width, height, rows, cols):
     while run:
         # update screen
         draw(win, grid, width, height, rows, cols)
+        clock.tick(fps)
+
         for event in pygame.event.get():
             # Escape
             if event.type == pygame.QUIT:
                 run = False
 
-            # Q: set Start node
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    if start:
-                        start.set_walkable()
-                    node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                    node.set_start()
-                    start = node           
-
-            # E: set End node
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_e:
-                    if end:
-                        end.set_walkable()
-                    node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                    node.set_end()
-                    end = node
-
+            # Mouse
             # left mouse: set wall node
             if pygame.mouse.get_pressed()[0]:
                 node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
@@ -58,14 +49,36 @@ def main(win, width, height, rows, cols):
                 node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
                 node.set_walkable()
 
-            # Space: start pathfinding visualizer
+            # Keyboard
             if event.type == pygame.KEYDOWN:
+                # Q: set Start node
+                if event.key == pygame.K_q:
+                    if start:
+                        start.set_walkable()
+                    node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
+                    node.set_start()
+                    start = node
+
+                # E: set End node
+                if event.key == pygame.K_e:
+                    if end:
+                        end.set_walkable()
+                    node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
+                    node.set_end()
+                    end = node
+
+                # Space: start pathfinding visualizer
                 if event.key == pygame.K_SPACE and start and end:
                     breadth_first(
                         lambda: draw(win, grid, width, height, rows, cols),
+                        lambda: clock.tick(algo_clock(gear)),
                         start=start,
                         end=end,
                         grid=grid
                     )
+
+                # R: Reset
+                if event.key == pygame.K_r:
+                    grid.cleanup()
 
     pygame.quit()

@@ -2,25 +2,25 @@ import pygame
 
 
 # Colors
-RED = (255, 0, 0)           # Closed
+RED = (255, 0, 0)           # start
 GREEN = (0, 255, 0)         # Open
-BLACK = (0, 0, 0)           # Barrier
-ORANGE = (255, 165 ,0)      # Start
+BLACK = (0, 0, 0)           # Wall
+ORANGE = (255, 165 ,0)      # closed
 TURQUOISE = (64, 224, 208)  # End
-PURPLE = (128, 0, 128)      # Path
-WHITE = (255, 255, 255)     # Reset
-BLUE = (0, 255, 0)          # ?
+PURPLE = (128, 0, 128)      # ?
+WHITE = (220, 220, 220)     # grid
+BLUE = (0, 0, 255)          # PATH
 YELLOW = (255, 255, 0)      # ?
-GREY = (128, 128, 128)      # ?
+GREY = (119, 136, 153)      # walkable
 
 color_dic = {
-    'walkable': WHITE,
+    'walkable': GREY,
     'wall': BLACK,
-    'start': ORANGE,
-    'end': TURQUOISE,
-    'closed': RED,
+    'start': RED,
+    'end': BLUE,
+    'closed': ORANGE,
     'open': GREEN,
-    'path': PURPLE
+    'path': TURQUOISE
 }
 
 def draw_grid(win, width, height, rows, cols):
@@ -32,13 +32,14 @@ def draw_grid(win, width, height, rows, cols):
         rows: amount of rows
         cols: amount of columns
     '''
+    color = BLACK
     gap_x = width // cols
     gap_y = height // rows
     for i in range(cols):
-        pygame.draw.line(win, GREY, (0, i * gap_x), (height, i * gap_x))
+        pygame.draw.line(win, color, (0, i * gap_x), (height, i * gap_x))
 
     for j in range(rows):
-        pygame.draw.line(win, GREY, (j * gap_y, 0), (j * gap_y, width))    
+        pygame.draw.line(win, color, (j * gap_y, 0), (j * gap_y, width))    
 
 def get_color(node):
     '''

@@ -2,16 +2,18 @@ import pygame, sys
 from core.utils.backtracking import backtrace
 
 
-def breadth_first(draw, start, end, grid):
+def breadth_first(draw, clock, start, end, grid):
     '''
     starting at start node, frontier is expanding outward,
     whilst marking visited nodes
         draw: updates screen with pygame
+        clock: upper boundary for fps, regulates speed
         start: start node
         end: end node
         grid: grid
     '''
     draw()
+    fps = 240
 
     # put start in frontier list
     frontier = [start]
@@ -52,3 +54,4 @@ def breadth_first(draw, start, end, grid):
                 neighbor.set_open()
         
         draw()
+        clock()

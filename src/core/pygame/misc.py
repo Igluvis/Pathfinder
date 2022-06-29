@@ -13,3 +13,17 @@ def get_node(pos, grid, width, height):
     y = y_pos // height
     
     return grid.node(x,y)
+
+def algo_clock(clock_gear):
+    '''
+    returns fps for algo visualizer clock
+    fps     s to complete
+    30      44
+    60      22
+    120     11
+        clock_gear: int from [0,1,2]
+    '''
+    match clock_gear:
+        case 0: return 30
+        case 1: return 60
+        case 2: return 120

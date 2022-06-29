@@ -17,17 +17,12 @@ class Node():
         '''
         self.status = status
 
-        self.cleanup()
-
     def __lt__(self, other):
         '''
         in A* compare f value against infinity if not already calculated
         '''
         return False
 
-    def cleanup(self):
-        # backtracking
-        self.parent = None
 
     # get status methods
     def get_wall(self):
@@ -69,3 +64,11 @@ class Node():
 
     def set_path(self):
         self.status = 'path'
+
+    def cleanup(self):
+        # backtracking
+        self.parent = None
+
+        # make walkable
+        if not self.get_start() and not self.get_end():
+            self.set_walkable()
