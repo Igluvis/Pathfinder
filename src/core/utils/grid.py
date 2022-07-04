@@ -31,7 +31,7 @@ class Grid():
 
     def node(self, x, y):
         '''
-        get node at pos (x,y)
+        get Node at pos (x,y)
             x: x coord
             y: y coord
         '''
@@ -48,7 +48,7 @@ class Grid():
     def walkable(self, x, y):
         '''
         helper function
-        returns if node at (x,y) is walkable == 1 and has to exist
+        checks if Node is inside Grid, walkable
             x: x coord
             y: y coord
         '''
@@ -86,6 +86,9 @@ class Grid():
         return neighbors
 
     def cleanup(self):
+        '''
+        resets node.parent and node.status to default in grid
+        '''
         for columns in self.nodes:
             for node in columns:
                 node.cleanup()

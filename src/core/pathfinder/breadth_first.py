@@ -13,7 +13,6 @@ def breadth_first(draw, clock, start, end, grid):
         grid: grid
     '''
     draw()
-    fps = 240
 
     # put start in frontier list
     frontier = [start]

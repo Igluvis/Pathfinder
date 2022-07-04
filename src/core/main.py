@@ -5,6 +5,7 @@ from core.pygame.misc import get_node, algo_clock
 from core.pathfinder.a_star import a_star
 from core.pathfinder.breadth_first import breadth_first
 
+
 clock = pygame.time.Clock()
 
 def main(win, width, height, rows, cols):
@@ -27,6 +28,7 @@ def main(win, width, height, rows, cols):
     
     # run loop
     run = True
+    waiting = True
 
     while run:
         # update screen
@@ -38,47 +40,56 @@ def main(win, width, height, rows, cols):
             if event.type == pygame.QUIT:
                 run = False
 
-            # Mouse
-            # left mouse: set wall node
-            if pygame.mouse.get_pressed()[0]:
-                node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                node.set_wall()
-
-            # right mouse: set walk node
-            if pygame.mouse.get_pressed()[2]:
-                node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                node.set_walkable()
-
-            # Keyboard
-            if event.type == pygame.KEYDOWN:
-                # Q: set Start node
-                if event.key == pygame.K_q:
-                    if start:
-                        start.set_walkable()
+            if waiting:
+                # Mouse
+                # left mouse: set wall node
+                if pygame.mouse.get_pressed()[0]:
                     node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                    node.set_start()
-                    start = node
+                    node.set_wall()
 
-                # E: set End node
-                if event.key == pygame.K_e:
-                    if end:
-                        end.set_walkable()
+                # right mouse: set walk node
+                if pygame.mouse.get_pressed()[2]:
                     node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                    node.set_end()
-                    end = node
+                    node.set_walkable()
 
-                # Space: start pathfinding visualizer
-                if event.key == pygame.K_SPACE and start and end:
-                    breadth_first(
-                        lambda: draw(win, grid, width, height, rows, cols),
-                        lambda: clock.tick(algo_clock(gear)),
-                        start=start,
-                        end=end,
-                        grid=grid
-                    )
+                # Keyboard
+                if event.type == pygame.KEYDOWN:
+                    # Q: set Start node
+                    if event.key == pygame.K_q:
+                        if start:
+                            start.set_walkable()
+                        node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
+                        node.set_start()
+                        start = node
 
-                # R: Reset
-                if event.key == pygame.K_r:
+                    # E: set End node
+                    if event.key == pygame.K_e:
+                        if end:
+                            end.set_walkable()
+                        node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
+                        node.set_end()
+                        end = node
+
+                    # Space: start pathfinding visualizer
+                    if event.key == pygame.K_SPACE and start and end:
+                        a_star(
+                            lambda: draw(win, grid, width, height, rows, cols),
+                            lambda: clock.tick(algo_clock(gear)),
+                            start=start,
+                            end=end,
+                            grid=grid
+                        )
+                        waiting = False
+
+                    # R: Reset
+                    if event.key == pygame.K_r:
+                        grid.cleanup()
+            
+            # not waiting
+            else:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                     grid.cleanup()
+                    waiting = True
+
 
     pygame.quit()

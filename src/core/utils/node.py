@@ -1,4 +1,4 @@
-class Node():
+class Node(object):
     '''
     Node with own x and y coordinates on a grid
     '''
@@ -16,12 +16,14 @@ class Node():
         open
         '''
         self.status = status
+        self.g = 0
 
     def __lt__(self, other):
         '''
         in A* compare f value against infinity if not already calculated
+        h as tiebreaker
         '''
-        return False
+        return self.f < other.f if self.f != other.f else self.h < other.h
 
 
     # get status methods
@@ -72,3 +74,8 @@ class Node():
         # make walkable
         if not self.get_start() and not self.get_end():
             self.set_walkable()
+
+        # cost cleanup
+        self.h = 0
+        self.g = 0
+        self.f = 0

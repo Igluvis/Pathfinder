@@ -12,6 +12,7 @@ WHITE = (220, 220, 220)     # grid
 BLUE = (0, 0, 255)          # PATH
 YELLOW = (255, 255, 0)      # ?
 GREY = (119, 136, 153)      # walkable
+BROWN = (153, 136, 119)     # ?
 
 color_dic = {
     'walkable': GREY,
