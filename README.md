@@ -14,9 +14,13 @@ By pressing spacebar, an animated A* pathfinding solution will be shown, blue in
 Controls :
 
 Q : Start node
+
 E : End node
+
 Spacebar : start A*
+
 Left-Click : Draws wall
+
 Right-Click : clears Node
 
 
