@@ -40,7 +40,7 @@ def draw_grid(win, width, height, rows, cols):
         pygame.draw.line(win, color, (0, i * gap_x), (height, i * gap_x))
 
     for j in range(rows):
-        pygame.draw.line(win, color, (j * gap_y, 0), (j * gap_y, width))    
+        pygame.draw.line(win, color, (j * gap_y, 0), (j * gap_y, width))
 
 def get_color(node):
     '''

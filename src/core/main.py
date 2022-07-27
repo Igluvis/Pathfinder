@@ -4,7 +4,7 @@ from core.pygame.visualize import draw
 from core.pygame.misc import get_node, algo_clock
 from core.pathfinder.a_star import a_star
 from core.pathfinder.breadth_first import breadth_first
-
+from core.mazebuilder.binary_maze import binary_maze
 
 clock = pygame.time.Clock()
 
@@ -81,6 +81,17 @@ def main(win, width, height, rows, cols):
                         )
                         waiting = False
 
+                    # M: start mazebuilder
+                    if event.key == pygame.K_m and start and end:
+                        grid.cleanup()
+                        binary_maze(
+                            lambda: draw(win, grid, width, height, rows, cols),
+                            lambda: clock.tick(algo_clock(gear)),
+                            start=start,
+                            end=end,
+                            grid=grid
+                        )
+                    
                     # R: Reset
                     if event.key == pygame.K_r:
                         grid.cleanup()

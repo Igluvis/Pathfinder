@@ -54,12 +54,13 @@ class Grid():
         '''
         return (self.nodes[x][y].get_walkable() or self.nodes[x][y].get_end()) if self.inside(x, y) else False
 
-    def neighbors(self, node):
+    def neighbors(self, node, mode = 'all'):
         '''
         get all neighbors of one node
         1. checks each neighbor if walkable
         2. adds neighbor node to list
             node: node
+            mode: string(all, northeastsouthwest)
         '''
         # coords
         x = node.x
@@ -68,19 +69,19 @@ class Grid():
         neighbors = []
 
         # ↑
-        if self.walkable(x, y - 1):
+        if self.walkable(x, y - 1) and (mode == 'all' or 'north' in mode):
             neighbors.append(self.nodes[x][y - 1])
 
         # →
-        if self.walkable(x + 1, y):
+        if self.walkable(x + 1, y) and (mode == 'all' or 'east' in mode):
             neighbors.append(self.nodes[x + 1][y])
 
         # ←          
-        if self.walkable(x - 1, y):
+        if self.walkable(x - 1, y) and (mode == 'all' or 'west' in mode):
             neighbors.append(self.nodes[x - 1][y])
 
         # ↓
-        if self.walkable(x, y + 1):
+        if self.walkable(x, y + 1) and (mode == 'all' or 'south' in mode):
             neighbors.append(self.nodes[x][y + 1])
 
         return neighbors
