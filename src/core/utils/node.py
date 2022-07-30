@@ -72,7 +72,7 @@ class Node(object):
         self.parent = None
 
         # make walkable
-        if not self.get_start() and not self.get_end():
+        if not self.get_start() and not self.get_end() and not self.get_wall():
             self.set_walkable()
 
         # cost cleanup

@@ -96,3 +96,11 @@ class Grid():
         for columns in self.nodes:
             for node in columns:
                 node.cleanup()
+
+    def make_blank(self):
+        '''
+        resets node.parent and node.status to default in grid
+        '''
+        for columns in self.nodes:
+            for node in columns:
+                node.set_walkable()

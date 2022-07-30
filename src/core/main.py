@@ -94,7 +94,9 @@ def main(win, width, height, rows, cols):
                     
                     # R: Reset
                     if event.key == pygame.K_r:
-                        grid.cleanup()
+                        start = None
+                        end = None
+                        grid.make_blank()
             
             # not waiting
             else:
