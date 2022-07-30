@@ -39,11 +39,13 @@ def binary_maze(draw, clock, start, end, grid):
                 pygame.quit()
                 sys.exit()
 
+        # draw pillars
         draw_mazegrid(grid, start, end)
+
         # seperate grid into passages and borders
         for column in grid.nodes[::2]:
             for node in column[::2]:
-                neighbors = grid.neighbors(node, mode)
+                neighbors = grid.neighbors(node, mode, maze = True)
                 # neighbors has to exist - corner edge case
                 if neighbors:
                     for neighbor in neighbors: 

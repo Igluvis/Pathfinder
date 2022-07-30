@@ -73,7 +73,7 @@ def draw(win, grid, width, height, rows, cols):
     '''
     win.fill(WHITE)
 
-    draw_nodes(win, grid, width=width/cols, height=height/rows)
+    draw_nodes(win, grid, width=width//cols, height=height//rows)
     draw_grid(win, width, height, rows, cols)
 
     # BRUH I FORGOT .update AND WASTED 2h SEARCHING FOR THIS

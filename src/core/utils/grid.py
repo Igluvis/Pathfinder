@@ -54,34 +54,37 @@ class Grid():
         '''
         return (self.nodes[x][y].get_walkable() or self.nodes[x][y].get_end()) if self.inside(x, y) else False
 
-    def neighbors(self, node, mode = 'all'):
+    def neighbors(self, node, mode = 'all', maze = False):
         '''
         get all neighbors of one node
         1. checks each neighbor if walkable
         2. adds neighbor node to list
+        in case of maze checks maze neighbors and adds passages to list
             node: node
             mode: string(all, northeastsouthwest)
+            maze: bool
         '''
         # coords
         x = node.x
         y = node.y
+        offset = 2 if maze else 1
 
         neighbors = []
 
         # ↑
-        if self.walkable(x, y - 1) and (mode == 'all' or 'north' in mode):
+        if self.walkable(x, y - offset) and (mode == 'all' or 'north' in mode):
             neighbors.append(self.nodes[x][y - 1])
 
         # →
-        if self.walkable(x + 1, y) and (mode == 'all' or 'east' in mode):
+        if self.walkable(x + offset, y) and (mode == 'all' or 'east' in mode):
             neighbors.append(self.nodes[x + 1][y])
 
         # ←          
-        if self.walkable(x - 1, y) and (mode == 'all' or 'west' in mode):
+        if self.walkable(x - offset, y) and (mode == 'all' or 'west' in mode):
             neighbors.append(self.nodes[x - 1][y])
 
         # ↓
-        if self.walkable(x, y + 1) and (mode == 'all' or 'south' in mode):
+        if self.walkable(x, y + offset) and (mode == 'all' or 'south' in mode):
             neighbors.append(self.nodes[x][y + 1])
 
         return neighbors
