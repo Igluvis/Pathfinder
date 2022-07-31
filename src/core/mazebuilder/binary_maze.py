@@ -1,20 +1,6 @@
 import pygame, sys, random
+from core.pygame.visualize import draw_mazegrid
 
-
-def draw_mazegrid(grid, start, end):
-    '''
-    ooooo
-    oxoxo
-    ooooo
-    draws x's
-        grid: grid
-        start: start node
-        end: end node
-    '''
-    for column in grid.nodes[1::2]:
-            for node in column[1::2]:
-                if node != start and node != end:
-                    node.set_wall()
 
 def binary_maze(draw, clock, start, end, grid):
     '''
@@ -24,8 +10,6 @@ def binary_maze(draw, clock, start, end, grid):
         start: start node
         end: end node
         grid: grid
-
-        works only for uneven grid sizes
     '''
     draw()
 
@@ -39,7 +23,7 @@ def binary_maze(draw, clock, start, end, grid):
                 pygame.quit()
                 sys.exit()
 
-        # draw pillars
+        # draw mazegrid
         draw_mazegrid(grid, start, end)
 
         # seperate grid into passages and borders
@@ -48,11 +32,7 @@ def binary_maze(draw, clock, start, end, grid):
                 neighbors = grid.neighbors(node, mode, maze = True)
                 # neighbors has to exist - corner edge case
                 if neighbors:
-                    for neighbor in neighbors: 
-                        if neighbor != start and neighbor != end:
-                            neighbor.set_wall()
-                    
-                    # make passage
+                    # make passage randomly between 2 directions
                     passage = random.choice(neighbors)
                     if passage != start and passage != end:
                         passage.set_walkable()

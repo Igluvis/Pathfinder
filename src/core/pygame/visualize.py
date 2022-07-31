@@ -78,3 +78,25 @@ def draw(win, grid, width, height, rows, cols):
 
     # BRUH I FORGOT .update AND WASTED 2h SEARCHING FOR THIS
     pygame.display.update()
+
+def draw_mazegrid(grid, start, end):
+    '''
+    xxxxx
+    xoxox
+    xxxxx
+    draws x's as walls
+        grid: grid
+        start: start node
+        end: end node
+    '''
+    # horizontal lines
+    for column in grid.nodes[1::2]:
+        for node in column:
+            if node != start and node != end:
+                    node.set_wall()
+
+    # fill in passages on room columns
+    for column in grid.nodes[::2]:
+        for node in column[1::2]:
+            if node != start and node != end:
+                    node.set_wall()

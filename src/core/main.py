@@ -5,6 +5,7 @@ from core.pygame.misc import get_node, algo_clock
 from core.pathfinder.a_star import a_star
 from core.pathfinder.breadth_first import breadth_first
 from core.mazebuilder.binary_maze import binary_maze
+from core.mazebuilder.sidewinder import sidewinder
 
 clock = pygame.time.Clock()
 
@@ -45,12 +46,14 @@ def main(win, width, height, rows, cols):
                 # left mouse: set wall node
                 if pygame.mouse.get_pressed()[0]:
                     node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                    node.set_wall()
+                    if not node.get_start() and not node.get_end():
+                        node.set_wall()
 
                 # right mouse: set walk node
                 if pygame.mouse.get_pressed()[2]:
                     node = get_node(pygame.mouse.get_pos(), grid, width=width//cols, height=height//rows)
-                    node.set_walkable()
+                    if not node.get_start() and not node.get_end():
+                        node.set_walkable()
 
                 # Keyboard
                 if event.type == pygame.KEYDOWN:
@@ -84,7 +87,7 @@ def main(win, width, height, rows, cols):
                     # M: start mazebuilder
                     if event.key == pygame.K_m and start and end:
                         grid.cleanup()
-                        binary_maze(
+                        sidewinder(
                             lambda: draw(win, grid, width, height, rows, cols),
                             lambda: clock.tick(algo_clock(gear)),
                             start=start,
