@@ -52,7 +52,7 @@ class Grid():
             x: x coord
             y: y coord
         '''
-        return (self.nodes[x][y].get_walkable() or self.nodes[x][y].get_end()) if self.inside(x, y) else False
+        return (self.nodes[x][y].get_walkable() or self.nodes[x][y].get_end() or self.nodes[x][y].get_open()) if self.inside(x, y) else False
 
     def neighbors(self, node, mode = 'all', maze = False):
         '''

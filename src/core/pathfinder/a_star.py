@@ -70,3 +70,7 @@ def a_star(draw, clock, start, end, grid):
         # close current node
         if current != start:
             current.set_closed()
+    
+    # path from start or end blocked
+    print('No path found!')
+    return False

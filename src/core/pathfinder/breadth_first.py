@@ -54,3 +54,7 @@ def breadth_first(draw, clock, start, end, grid):
         
         draw()
         clock()
+    
+    # path from start or end blocked
+    print('No path found!')
+    return False

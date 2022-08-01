@@ -85,7 +85,7 @@ def main(win, width, height, rows, cols):
                         waiting = False
 
                     # M: start mazebuilder
-                    if event.key == pygame.K_m and start and end:
+                    if event.key == pygame.K_m:
                         grid.cleanup()
                         sidewinder(
                             lambda: draw(win, grid, width, height, rows, cols),
