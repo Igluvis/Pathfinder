@@ -13,11 +13,15 @@ By pressing spacebar, an animated A* pathfinding solution will be shown, blue in
 
 Controls :
 
-Q : Start node
+Q : draws Start node
 
-E : End node
+E : draws End node
 
-Spacebar : start A*
+Spacebar : visualizes A* pathfinding algorithm
+
+M : draws a sidewinder maze
+
+F : locates longest path in maze and sets start and end nodes accordingly
 
 Left-Click : Draws wall
 
