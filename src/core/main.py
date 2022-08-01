@@ -76,7 +76,7 @@ def main(win, width, height, rows, cols):
 
                     # Space: start pathfinding visualizer
                     if event.key == pygame.K_SPACE and start and end:
-                        dijkstra(
+                        a_star(
                             lambda: draw(win, grid, width, height, rows, cols),
                             lambda: clock.tick(algo_clock(gear)),
                             start=start,

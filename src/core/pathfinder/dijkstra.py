@@ -39,7 +39,9 @@ def dijkstra(draw, clock, start, end, grid, calc = False):
 
         # add each neighbor from current who is not in visited to frontier
         for neighbor in neighbors:
+            # temp g cost
             temp_g = current.g + neighbor.cost
+            
             # if neighbor not already visited or better path found
             if not neighbor.g or temp_g < neighbor.g:
                 # g : distance from start to neighbor
@@ -47,7 +49,6 @@ def dijkstra(draw, clock, start, end, grid, calc = False):
             
                 # trace parent for backtracking
                 neighbor.parent = current
-                frontier.append(neighbor)
 
                 if neighbor not in frontier:
                     heapq.heappush(frontier, neighbor)
