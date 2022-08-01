@@ -2,7 +2,7 @@ class Node(object):
     '''
     Node with own x and y coordinates on a grid
     '''
-    def __init__(self, x=0, y=0, status='walkable'):
+    def __init__(self, x=0, y=0, status='walkable', cost=1):
         # Coordinates
         self.x = x
         self.y = y
@@ -17,14 +17,17 @@ class Node(object):
         '''
         self.status = status
         self.g = 0
+        self.cost = cost
 
     def __lt__(self, other):
         '''
         in A* compare f value against infinity if not already calculated
         h as tiebreaker
         '''
-        return self.f < other.f if self.f != other.f else self.h < other.h
-
+        try:
+            return self.f < other.f if self.f != other.f else self.h < other.h
+        except:
+            return self.g < other.g
 
     # get status methods
     def get_wall(self):

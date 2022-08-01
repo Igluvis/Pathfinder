@@ -1,11 +1,12 @@
 import pygame
 from core.utils.grid import Grid
 from core.pygame.visualize import draw
-from core.pygame.misc import get_node, algo_clock
+from core.pygame.misc import get_node, algo_clock, find_furthest_node
 from core.pathfinder.a_star import a_star
 from core.pathfinder.breadth_first import breadth_first
 from core.mazebuilder.binary_maze import binary_maze
 from core.mazebuilder.sidewinder import sidewinder
+from core.pathfinder.dijkstra import dijkstra
 
 clock = pygame.time.Clock()
 
@@ -75,7 +76,7 @@ def main(win, width, height, rows, cols):
 
                     # Space: start pathfinding visualizer
                     if event.key == pygame.K_SPACE and start and end:
-                        a_star(
+                        dijkstra(
                             lambda: draw(win, grid, width, height, rows, cols),
                             lambda: clock.tick(algo_clock(gear)),
                             start=start,
@@ -94,6 +95,48 @@ def main(win, width, height, rows, cols):
                             end=end,
                             grid=grid
                         )
+                    
+                    # F: find longest path
+                    if event.key == pygame.K_f and start:
+                        if end:
+                            # remove end
+                            end.set_walkable()
+                            end = None
+                        # calc g score for entire maze
+                        dijkstra(
+                            lambda: draw(win, grid, width, height, rows, cols),
+                            lambda: clock.tick(algo_clock(gear)),
+                            start=start,
+                            end=end,
+                            grid=grid,
+                            calc=True
+                        )
+                        # find starting node
+                        start.set_walkable()
+                        node = find_furthest_node(grid)
+                        node.set_start()
+                        start = node
+
+                        # clear values
+                        grid.cleanup()
+
+                        # calc g score again
+                        dijkstra(
+                            lambda: draw(win, grid, width, height, rows, cols),
+                            lambda: clock.tick(algo_clock(gear)),
+                            start=start,
+                            end=end,
+                            grid=grid,
+                            calc=True
+                        )
+
+                        # find end node
+                        node = find_furthest_node(grid)
+                        node.set_end()
+                        end = node
+
+                        # clear values
+                        grid.cleanup()
                     
                     # R: Reset
                     if event.key == pygame.K_r:

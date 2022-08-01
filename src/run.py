@@ -2,13 +2,13 @@ import pygame
 from core.main import main
 
 # Window
-WIDTH = 660
-HEIGHT = 660
+WIDTH = 600
+HEIGHT = 600
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pathfinder")
 
 # Grid
-ROWS, COLS = 55, 55
+ROWS, COLS = 15, 15
 
 # Main loop
 if WIDTH % COLS == 0 and HEIGHT % ROWS == 0:

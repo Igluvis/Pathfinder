@@ -1,10 +1,9 @@
 import pygame, sys
 from core.utils.backtracking import backtrace
 import heapq
-from .heuristic import manhattan, octile
 
 
-def a_star(draw, clock, start, end, grid):
+def dijkstra(draw, clock, start, end, grid, calc = False):
     '''
     starting at start node, frontier is expanding outward,
     whilst marking visited nodes
@@ -15,10 +14,6 @@ def a_star(draw, clock, start, end, grid):
         grid: grid
     '''
     draw()
-
-    # set start.g and start.f
-    start.g = 0
-    start.f = 0
 
     # put start in frontier list
     frontier = [start]
@@ -35,7 +30,7 @@ def a_star(draw, clock, start, end, grid):
         frontier.remove(current)
 
         # found path
-        if current == end:
+        if current == end and not calc:
             backtrace(draw, current, start, end)
             return True
 
@@ -44,29 +39,24 @@ def a_star(draw, clock, start, end, grid):
 
         # add each neighbor from current who is not in visited to frontier
         for neighbor in neighbors:
-            # temp  g cost            
             temp_g = current.g + neighbor.cost
-            
             # if neighbor not already visited or better path found
             if not neighbor.g or temp_g < neighbor.g:
                 # g : distance from start to neighbor
-                neighbor.g = temp_g 
-                # h : estimated distance from neighbor to end
-                neighbor.h = manhattan(neighbor, end)  
-                # f : estimated distance from start to end
-                neighbor.f = neighbor.g + neighbor.h
-
+                neighbor.g = temp_g
+            
                 # trace parent for backtracking
                 neighbor.parent = current
+                frontier.append(neighbor)
 
                 if neighbor not in frontier:
                     heapq.heappush(frontier, neighbor)
                     if not neighbor.get_end() and not neighbor.get_start():
                         neighbor.set_open()
-
+        
         draw()
         clock()
-        
+
         # close current node
         if current != start:
             current.set_closed()
