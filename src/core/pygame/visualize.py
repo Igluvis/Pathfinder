@@ -5,11 +5,11 @@ import pygame
 RED = (255, 0, 0)           # start
 GREEN = (0, 255, 0)         # Open
 BLACK = (0, 0, 0)           # Wall
-ORANGE = (255, 165 ,0)      # closed
-TURQUOISE = (64, 224, 208)  # End
+ORANGE = (255, 191 , 0)     # closed
+TURQUOISE = (0, 139, 139)   # path
 PURPLE = (128, 0, 128)      # ?
 WHITE = (220, 220, 220)     # grid
-BLUE = (0, 0, 255)          # PATH
+BLUE = (0, 0, 255)          # end
 YELLOW = (255, 255, 0)      # ?
 GREY = (119, 136, 153)      # walkable
 BROWN = (153, 136, 119)     # ?
@@ -42,12 +42,41 @@ def draw_grid(win, width, height, rows, cols):
     for j in range(rows):
         pygame.draw.line(win, color, (j * gap_y, 0), (j * gap_y, width))
 
+def dynamic_color(node):
+    '''
+    add g score to rgb values; darkens path based on distance
+        node: node
+    '''    
+    if node.get_closed():
+        # ORANGE       # closed
+        color = color_dic[node.status]
+
+        color_list = list(color)
+        
+        for i, rgb in enumerate(color_list):
+            color_list[i] = rgb - node.g if rgb - node.g >= 0 else 0
+
+    else:
+        # BLUE         # PATH
+        color = color_dic[node.status]
+    
+        color_list = list(color)
+        
+        for i, rgb in enumerate(color_list):
+            color_list[i] = rgb + node.g if rgb + node.g <= 255 else 255
+
+    return tuple(color_list)
+
 def get_color(node):
     '''
     returns color depending on current status of node
+    dynamic coloring for closed and path node based on g score
         node: node
     '''
-    return color_dic[node.status]
+    if node.get_closed() or node.get_path():
+        return dynamic_color(node)
+    else:
+        return color_dic[node.status]
 
 def draw_nodes(win, grid, width, height):
     '''

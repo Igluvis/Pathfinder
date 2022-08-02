@@ -8,7 +8,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pathfinder")
 
 # Grid
-ROWS, COLS = 15, 15
+ROWS, COLS = 60, 60
 
 # Main loop
 if WIDTH % COLS == 0 and HEIGHT % ROWS == 0:

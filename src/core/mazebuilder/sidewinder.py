@@ -4,6 +4,7 @@ from core.pygame.visualize import draw_mazegrid
 
 def sidewinder(draw, clock, start, end, grid):
     '''
+    perfect maze
     goes through columns and adds nodes to a list, randomly closes list and opens a passage to a predefined direction
         draw: updates screen with pygame
         clock: upper boundary for fps, regulates speed

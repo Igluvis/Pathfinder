@@ -48,6 +48,9 @@ class Node(object):
     def get_open(self):
         return self.status == 'open'
 
+    def get_path(self):
+        return self.status == 'path'
+
     # set status methods
     def set_wall(self):
         self.status = 'wall'

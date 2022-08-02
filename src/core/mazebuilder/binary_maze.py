@@ -4,6 +4,7 @@ from core.pygame.visualize import draw_mazegrid
 
 def binary_maze(draw, clock, start, end, grid):
     '''
+    perfect maze
     starting at grid.nodes[0,0] for every 2 steps open randomly east or south border
         draw: updates screen with pygame
         clock: upper boundary for fps, regulates speed
