@@ -5,8 +5,8 @@ import pygame
 RED = (255, 0, 0)           # start
 GREEN = (0, 255, 0)         # Open
 BLACK = (0, 0, 0)           # Wall
-ORANGE = (255, 191 , 0)     # closed
-TURQUOISE = (0, 139, 139)   # path
+ORANGE = (255, 191, 0)      # closed
+TURQUOISE = (0, 206, 209)   # path
 PURPLE = (128, 0, 128)      # ?
 WHITE = (220, 220, 220)     # grid
 BLUE = (0, 0, 255)          # end
@@ -44,7 +44,7 @@ def draw_grid(win, width, height, rows, cols):
 
 def dynamic_color(node):
     '''
-    add g score to rgb values; darkens path based on distance
+    add g score to rgb values; darkens closed nodes and lightens path nodes based on distance
         node: node
     '''    
     if node.get_closed():
