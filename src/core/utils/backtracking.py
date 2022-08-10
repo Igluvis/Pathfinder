@@ -1,4 +1,4 @@
-def backtrace(draw, current, start, end):
+def backtrace(draw, current, start, end, grid):
     '''
     draw: update window
     current: current node
@@ -12,6 +12,7 @@ def backtrace(draw, current, start, end):
                 current.set_path()
 
         current = current.parent
-        draw()
+        if grid.cols < 30 and grid.rows < 30:
+                    draw()
 
     return path

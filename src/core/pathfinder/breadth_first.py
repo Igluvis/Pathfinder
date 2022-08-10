@@ -29,7 +29,7 @@ def breadth_first(draw, clock, start, end, grid):
 
         # found path
         if current == end:
-            backtrace(draw, current, start, end)
+            backtrace(draw, current, start, end, grid)
             return True
 
         # close current node
@@ -52,8 +52,9 @@ def breadth_first(draw, clock, start, end, grid):
             if not neighbor.get_end() and not neighbor.get_start():
                 neighbor.set_open()
         
-        draw()
-        clock()
+        if grid.cols < 30 and grid.rows < 30:
+            draw()
+            clock()
     
     # path from start or end blocked
     print('No path found!')

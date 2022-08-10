@@ -4,7 +4,7 @@ from core.pygame.visualize import draw_mazegrid
 
 def binary_maze(draw, clock, start, end, grid):
     '''
-    perfect maze
+    generates perfect maze
     starting at grid.nodes[0,0] for every 2 steps open randomly east or south border
         draw: updates screen with pygame
         clock: upper boundary for fps, regulates speed
@@ -38,7 +38,11 @@ def binary_maze(draw, clock, start, end, grid):
                     if passage != start and passage != end:
                         passage.set_walkable()
 
-                draw()
-                clock()
-        
+                if grid.cols < 30 and grid.rows < 30:
+                    draw()
+                    clock()
+
+        draw()
+        clock()
+
         run = False

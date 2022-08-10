@@ -110,9 +110,9 @@ def draw(win, grid, width, height, rows, cols):
 
 def draw_mazegrid(grid, start, end):
     '''
-    xxxxx
-    xoxox
-    xxxxx
+    xtxtx
+    popop
+    xpxpx
     draws x's as walls
         grid: grid
         start: start node

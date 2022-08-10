@@ -27,7 +27,7 @@ class Node(object):
         try:
             return self.f < other.f if self.f != other.f else self.h < other.h
         except:
-            return self.g < other.g
+            return self.g < other.g # only for maze distance
 
     # get status methods
     def get_wall(self):

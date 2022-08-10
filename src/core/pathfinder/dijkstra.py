@@ -31,7 +31,7 @@ def dijkstra(draw, clock, start, end, grid, calc = False):
 
         # found path
         if current == end and not calc:
-            backtrace(draw, current, start, end)
+            backtrace(draw, current, start, end, grid)
             return True
 
         # neighbors
@@ -55,8 +55,9 @@ def dijkstra(draw, clock, start, end, grid, calc = False):
                     if not neighbor.get_end() and not neighbor.get_start():
                         neighbor.set_open()
         
-        draw()
-        clock()
+        if grid.cols < 30 and grid.rows < 30:
+            draw()
+            clock()
 
         # close current node
         if current != start:

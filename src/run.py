@@ -2,15 +2,15 @@ import pygame
 from core.main import main
 
 # Window
-WIDTH = 600
-HEIGHT = 600
+WIDTH = 610
+HEIGHT = 610
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pathfinder")
 
 # Grid
-ROWS, COLS = 30, 30
+ROWS, COLS = 61, 61
 
 # Main loop
-if WIDTH % COLS == 0 and HEIGHT % ROWS == 0:
-    main(WIN, WIDTH, HEIGHT, ROWS, COLS)
-else: print('Node size has to be integer')
+# if WIDTH % COLS == 0 and HEIGHT % ROWS == 0:
+main(WIN, WIDTH, HEIGHT, ROWS, COLS)
+# else: print('Node size has to be integer')
