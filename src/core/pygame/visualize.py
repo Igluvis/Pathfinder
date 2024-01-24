@@ -37,10 +37,10 @@ def draw_grid(win, width, height, rows, cols):
     gap_x = width // cols
     gap_y = height // rows
     for i in range(cols):
-        pygame.draw.line(win, color, (0, i * gap_x), (height, i * gap_x))
+        pygame.draw.line(win, color, (0, i*gap_x), (height, i*gap_x))
 
     for j in range(rows):
-        pygame.draw.line(win, color, (j * gap_y, 0), (j * gap_y, width))
+        pygame.draw.line(win, color, (j*gap_y, 0), (j*gap_y, width))
 
 def dynamic_color(node):
     '''
@@ -88,7 +88,7 @@ def draw_nodes(win, grid, width, height):
     '''
     for columns in grid.nodes:
         for node in columns:
-            pygame.draw.rect(win, get_color(node), (node.x * width, node.y * height, width, height))
+            pygame.draw.rect(win, get_color(node), (node.x*width, node.y*height, width, height))
 
 def draw(win, grid, width, height, rows, cols):
     '''

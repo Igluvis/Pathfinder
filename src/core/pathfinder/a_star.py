@@ -64,7 +64,7 @@ def a_star(draw, clock, start, end, grid):
                     if not neighbor.get_end() and not neighbor.get_start():
                         neighbor.set_open()
 
-        if grid.cols < 30 and grid.rows < 30:
+        if grid.cols < 100 and grid.rows < 100:
             draw()
             clock()
         
